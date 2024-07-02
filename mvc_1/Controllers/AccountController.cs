@@ -12,7 +12,7 @@ using System.Text;
 
 namespace mvc_1.Controllers
 {
-    public class AuthController(SignInManager<AppUser> signInManager, UserManager<AppUser> userManager) : Controller
+    public class AccountController(SignInManager<AppUser> signInManager, UserManager<AppUser> userManager) : Controller
     {
         
         public IActionResult Login(string? returnUrl = null)
@@ -32,7 +32,7 @@ namespace mvc_1.Controllers
 
                 if (result.Succeeded)
                 {
-                    return RedirectToLocal(returnUrl);
+                    return RedirectToAction("Add", "Student");
                 }
 
                 ModelState.AddModelError("", "Invalid login attempt");
@@ -66,7 +66,7 @@ namespace mvc_1.Controllers
                 {
                     await signInManager.SignInAsync(user, false);
 
-                    return RedirectToLocal(returnUrl);
+                    return RedirectToAction("Add", "Student");
                 }
                 foreach (var error in result.Errors)
                 {

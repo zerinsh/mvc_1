@@ -1,33 +1,71 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model List<mvc_1.Models.Entities.Student>
 
-@model List<mvc_1.Models.Entities.Student>
-
-<h1>Students</h1>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var student in Model)
-        {
-            <tr>
-                <td>@student.ID</td>
-                <td>@student.Name</td>
-                <td>@student.Email</td>
-                <td>
-                    <a class="btn btn-primary" asp-controller="Student" asp-action="Edit" asp-route-id="@student.ID">Edit</a>
-                </td>
-            </tr>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Students</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <style>
+        /* Pink gradient background */
+        body {
+            background: linear-gradient(135deg, #ff69b4, #e066ff); /* Pink to light purple gradient */
+            color: #fff; /* White text color */
+            background-attachment: fixed; /* Ensure gradient covers entire viewport */
         }
-    </tbody>
-</table>
+
+        /* Styling for table headers */
+        .table th {
+            color: #fff; /* White text color for table headers */
+        }
+
+        /* Styling for table data */
+        .table td {
+            color: #fff; /* White text color for table data */
+        }
+
+        .btn-primary {
+            background-color: #ff69b4; /* Pink background color */
+            border-color: #ff69b4; /* Pink border color */
+        }
+
+            .btn-primary:hover {
+                background-color: #e066ff; /* Light purple background color on hover */
+                border-color: #e066ff; /* Light purple border color on hover */
+            }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Students</h1>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var student in Model)
+                {
+                    <tr>
+                        <td>@student.ID</td>
+                        <td>@student.Name</td>
+                        <td>@student.Email</td>
+                        <td>
+                            <a class="btn btn-primary" asp-controller="Student" asp-action="Edit" asp-route-id="@student.ID">Edit</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+﻿@using mvc_1.ViewModels;
+@model LoginVM
+@{
+    ViewData["Title"] = "Login";
+}
+
+<style>
+    /* Pink gradient background */
+    body {
+        background: linear-gradient(135deg, #ff69b4, #e066ff); /* Pink to light purple gradient */
+        color: #fff; /* White text color */
+        background-attachment: fixed; /* Ensure gradient covers entire viewport */
+    }
+
+    /* Styling for login form */
+    .card {
+        background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Soft shadow */
+        color: #333; /* Dark text color for form elements */
+    }
+
+    .form-title {
+        color: #ff69b4; /* Pink text color for form labels */
+        font-weight: bold; /* Bold font for labels */
+    }
+    .form-label {
+        color: #ff69b4; /* Pink text color for form labels */
+        font-weight: bold; /* Bold font for labels */
+    }
+
+    .form-check-label {
+        color: #ff69b4; /* Pink text color for form check labels */
+    }
+
+    .btn-primary {
+        background-color: #ff69b4; /* Pink background color */
+        border-color: #ff69b4; /* Pink border color */
+    }
+
+    .btn-primary:hover {
+        background-color: #e066ff; /* Light purple background color on hover */
+        border-color: #e066ff; /* Light purple border color on hover */
+    }
+</style>
+
+<div class="row d-flex align-items-center justify-content-center">
+    <div class="col-md-3 card p-3">
+        <h2 class="login-title" style="color: #ff69b4;font-weight: bold;">
+            Login
+        </h2>
+        <form asp-action="Login" method="post" asp-route-returnurl="@ViewData["ReturnUrl"]">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="mb-1">
+                <label asp-for="Username" class="control-label form-label"></label>
+                <input asp-for="Username" class="form-control" />
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+            <div class="mb-1">
+                <label asp-for="Password" class="control-label form-label"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="mb-1 form-check">
+                <input asp-for="RememberMe" class="form-check-input" />
+                <label class="form-check-label form-label"> @Html.DisplayNameFor(a => a.RememberMe)</label>
+            </div>
+            <div class="row">
+                <div class="col-8">
+                    <a asp-action="Register" class="text-decoration-none float-start mt-2 text-pink" asp-route-returnurl="@ViewData["ReturnUrl"]">Don't have account?</a>
+                </div>
+                <div class="col-4">
+                    <input type="submit" value="Login" class="btn btn-primary btn-sm float-end" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

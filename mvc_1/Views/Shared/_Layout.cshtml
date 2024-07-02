@@ -7,12 +7,47 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/mvc_1.styles.css" asp-append-version="true" />
+    <style>
+        /* Pink gradient background */
+        body {
+            background: linear-gradient(135deg, #ff69b4, #e066ff); /* Pink to light purple gradient */
+            color: #fff; /* White text color */
+            background-attachment: fixed; /* Ensure gradient covers entire viewport */
+        }
+
+        /* Styling for navbar and links */
+        .navbar {
+            background: linear-gradient(135deg, #ff69b4, #e066ff); /* Same background as body */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Soft shadow */
+        }
+
+         .navbar a {
+                color: #fff; /* White text color */
+                transition: color 0.3s ease; /* Smooth color transition */
+         }
+
+         .navbar a:hover {
+            color: #333; /* Dark text color on hover */
+          }
+
+        .btn {
+            color: #fff; /* White text color for buttons */
+            background-color: transparent; /* Transparent background */
+            border-color: #fff; /* White border color */
+        }
+
+        .btn:hover {
+            color: #333; /* Dark text color on hover */
+           background-color: #fff; /* White background on hover */
+        }
+       
+    </style>
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-purple bg-pink border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">mvc_1</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Employee Portal</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -20,19 +55,34 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Student" asp-action="List">All Students</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Student" asp-action="Add">Add Students</a>
-                        </li>
+
                     </ul>
+
+                    @* Add this block to show Logout button when user is authenticated *@
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Student" asp-action="List">All Students</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Student" asp-action="Add">Add Students</a>
+                        </li>
+                        <form class="d-flex" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm">
+                            <button type="submit" class="btn btn-link nav-link">Logout</button>
+                            @Html.AntiForgeryToken()
+                        </form>
+                    }
+                    else
+                    {
+                        <a asp-area="" asp-controller="Account" asp-action="Login" class="nav-link">Login</a>
+                    }
+                    @* End of Logout button block *@
                 </div>
             </div>
         </nav>

@@ -17,14 +17,14 @@ namespace mvc_1.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+       
         public IActionResult Add()
         {
             return View();
         }
 
         [HttpPost]
-        [Authorize]
+        
         public async Task<IActionResult> Add(AddStudentViewModel viewModel)
         {
 
@@ -42,7 +42,7 @@ namespace mvc_1.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        
         public async Task<IActionResult> List()
         {
             var students = await dbContext.Students.ToListAsync();
@@ -59,7 +59,7 @@ namespace mvc_1.Controllers
 
 
         [HttpPost]
-        [Authorize]
+        
         public async Task<IActionResult> Edit(Student viewModel)
         {
             var student = await dbContext.Students.FindAsync(viewModel.ID);
@@ -78,7 +78,7 @@ namespace mvc_1.Controllers
             
         }
         [HttpPost]
-        [Authorize]
+        
         public async Task<IActionResult> Delete(Student viewModel)
         {
             var student = await dbContext.Students.AsNoTracking().FirstOrDefaultAsync(x => x.ID == viewModel.ID);
