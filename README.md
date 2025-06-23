@@ -105,4 +105,4 @@ This project is licensed under the MIT License.
 
 ## 🤛🏼 Author
 
-* **Your Name** – [@zerinsh](https://github.com/zerinsh)
+ [@zerinsh](https://github.com/zerinsh)
